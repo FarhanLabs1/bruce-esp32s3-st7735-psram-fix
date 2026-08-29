@@ -1,0 +1,606 @@
+ESP32-S3 Bruce Firmware
+Installation Guide
+===================
+
+This guide explains how to install the custom Bruce Firmware build for:
+
+ESP32-S3-WROOM-1-N16R8
+1.8" ST7735 TFT Display
+
+The firmware is configured for the ESP32-S3 N16R8 with:
+
+- 16 MB Flash
+- 8 MB OPI PSRAM
+
+For most users, the recommended installation method is the Espressif Web Flasher.
+
+
+------------------------------------------------------------
+1. BEFORE YOU START
+------------------------------------------------------------
+
+Make sure your device is:
+
+ESP32-S3-WROOM-1-N16R8
+
+Hardware configuration:
+
+Flash:
+16 MB
+
+PSRAM:
+8 MB OPI / Octal
+
+Make sure you are using the correct firmware for this hardware.
+
+Do not flash this firmware to a different ESP32 board unless you have verified
+that the hardware configuration is compatible.
+
+
+------------------------------------------------------------
+2. REQUIREMENTS
+------------------------------------------------------------
+
+You will need:
+
+- ESP32-S3-WROOM-1-N16R8
+- USB data cable
+- Windows PC / computer
+- 1.8" ST7735 display (if already installed)
+- Google Chrome, Microsoft Edge, or Brave browser
+
+NOTE:
+
+Brave has also been tested successfully with the Espressif Web Flasher for
+this project.
+
+Espressif officially documents Google Chrome and Microsoft Edge support.
+Brave has been tested successfully with this project.
+
+
+------------------------------------------------------------
+3. DOWNLOAD THE FIRMWARE
+------------------------------------------------------------
+
+Go to the Releases section of this GitHub repository:
+
+https://github.com/FarhanLabs1/bruce-esp32s3-st7735-psram-fix/releases
+
+Download the latest firmware release.
+
+The current release provides one firmware file:
+
+Bruce-ESP32-S3-N16R8.bin
+
+Only this .bin file is required for the current release.
+
+
+------------------------------------------------------------
+4. ESPRESSIF WEB FLASHER
+------------------------------------------------------------
+
+The recommended method for installing the firmware is Espressif's Web Flasher.
+
+Open:
+
+https://espressif.github.io/esptool-js/
+
+The Web Flasher allows the firmware to be written directly from your browser
+to the ESP32.
+
+
+------------------------------------------------------------
+5. CONNECTING THE ESP32-S3
+------------------------------------------------------------
+
+IMPORTANT:
+
+For flashing, connect the ESP32-S3 using the UART USB port.
+
+Do NOT use another USB port on the device if your build has multiple USB
+connections.
+
+Use the USB port connected to the UART interface for flashing.
+
+Connect the ESP32-S3 to your computer using a USB data cable.
+
+A charging-only USB cable will not work.
+
+After connecting the device, open:
+
+https://espressif.github.io/esptool-js/
+
+Click:
+
+Connect
+
+A serial-port selection window should appear.
+
+Select the COM port belonging to your ESP32-S3.
+
+
+------------------------------------------------------------
+6. ENTER DOWNLOAD MODE
+------------------------------------------------------------
+
+If the Web Flasher cannot connect to the ESP32-S3 automatically, put the
+device into download mode manually.
+
+1. Disconnect the ESP32-S3 from USB.
+
+2. Press and hold the BOOT button.
+
+3. Connect the USB cable to the UART port while holding BOOT.
+
+4. Press and release the RESET button if required.
+
+5. Release the BOOT button.
+
+6. Return to the Web Flasher.
+
+7. Click Connect.
+
+8. Select the ESP32-S3 COM port.
+
+The Web Flasher should now be able to communicate with the ESP32-S3
+bootloader.
+
+
+------------------------------------------------------------
+7. FLASHING THE FIRMWARE
+------------------------------------------------------------
+
+7.1 Connect to the ESP32-S3
+---------------------------
+
+Open:
+
+https://espressif.github.io/esptool-js/
+
+Click:
+
+Connect
+
+Select the COM port belonging to your ESP32-S3.
+
+
+7.2 Select the Firmware
+-----------------------
+
+Under the firmware/file section, select:
+
+Bruce-ESP32-S3-N16R8.bin
+
+IMPORTANT:
+
+Only select the .bin firmware file provided in the GitHub Release.
+
+Do not select the project source files.
+
+Do not select the .pio folder.
+
+Set the Flash Address to:
+
+0x0
+
+
+7.3 Set Flashing Options
+------------------------
+
+Before starting the flash, use the following settings:
+
+Baudrate:
+115200
+
+Flash Mode:
+DIO
+
+Flash Frequency:
+40m
+
+Flash Size:
+16MB
+
+Flash Address:
+0x0
+
+
+7.4 Start Flashing
+------------------
+
+After selecting the firmware and setting the options:
+
+Baudrate:
+115200
+
+Flash Mode:
+DIO
+
+Flash Frequency:
+40m
+
+Flash Size:
+16MB
+
+Flash Address:
+0x0
+
+Click the button to start flashing.
+
+Wait for the process to complete.
+
+The Web Flasher will display the flashing progress.
+
+IMPORTANT:
+
+DO NOT:
+
+- Disconnect the USB cable
+- Press RESET repeatedly
+- Close the browser
+- Shut down the computer
+
+while the firmware is being written.
+
+Wait until the Web Flasher reports that the flashing process has completed
+successfully.
+
+
+------------------------------------------------------------
+8. RESTART THE DEVICE
+------------------------------------------------------------
+
+After flashing has completed:
+
+1. Disconnect and reconnect the USB cable, or press RESET.
+
+2. Wait for the ESP32-S3 to restart.
+
+3. Wait for Bruce Firmware to boot.
+
+The 1.8" ST7735 display should start displaying the Bruce interface.
+
+
+------------------------------------------------------------
+9. VERIFY THE INSTALLATION
+------------------------------------------------------------
+
+After Bruce starts, open the device information / About section.
+
+Verify that the device is running the expected custom build.
+
+The hardware configuration is:
+
+ESP32-S3-WROOM-1-N16R8
+
+Flash:
+16 MB
+
+PSRAM:
+8 MB
+
+PSRAM Type:
+OPI / Octal
+
+The custom build information should also identify the modification where
+applicable:
+
+Modification:
+PSRAM Fix
+
+
+------------------------------------------------------------
+10. TROUBLESHOOTING
+------------------------------------------------------------
+
+10.1 ESP32-S3 does not appear in the COM port list
+-------------------------------------------------
+
+Try the following:
+
+1. Disconnect the USB cable.
+2. Reconnect the USB cable to the UART port.
+3. Try another USB port on your computer.
+4. Try another USB data cable.
+5. Put the ESP32-S3 into download mode manually.
+6. Restart the browser.
+7. Check Windows Device Manager.
+
+Make sure another application is not already using the COM port.
+
+Close applications such as:
+
+- Arduino Serial Monitor
+- PlatformIO Serial Monitor
+- Other serial terminal programs
+
+
+10.2 Web Flasher cannot connect
+-------------------------------
+
+Try entering download mode manually:
+
+1. Hold BOOT.
+2. Press RESET.
+3. Release RESET.
+4. Release BOOT.
+5. Click Connect again.
+6. Select the ESP32-S3 COM port.
+
+Also make sure you are connected to the UART port.
+
+
+10.3 Flashing succeeds but the device does not boot
+----------------------------------------------------
+
+Check the following settings:
+
+Flash Size:
+16MB
+
+Flash Mode:
+DIO
+
+Flash Frequency:
+40m
+
+Flash Address:
+0x0
+
+Make sure you selected:
+
+Bruce-ESP32-S3-N16R8.bin
+
+and not another file.
+
+Also make sure the firmware was intended for the ESP32-S3-WROOM-1-N16R8.
+
+
+10.4 Display does not work
+--------------------------
+
+If Bruce boots but the display remains blank:
+
+1. Turn off the device.
+2. Check the display wiring.
+3. Check 3.3V.
+4. Check GND.
+5. Check SPI connections.
+6. Check CS.
+7. Check DC.
+8. Check RESET.
+9. Verify the wiring diagram in this repository.
+
+Refer to:
+
+wiring-diagram/pinout.txt
+
+and:
+
+wiring-diagram/wiring-diagram.png
+
+
+10.5 Device keeps restarting
+----------------------------
+
+Repeated restarts may be caused by:
+
+- Incorrect firmware
+- Incorrect Flash configuration
+- Incorrect PSRAM configuration
+- Incorrect wiring
+- Power problems
+- Short circuits
+- Incorrect GPIO connections
+
+Disconnect external modules and test the ESP32-S3 with the minimum required
+hardware.
+
+
+10.6 PSRAM problems
+-------------------
+
+This project contains a PSRAM configuration fix for:
+
+ESP32-S3-WROOM-1-N16R8
+
+with:
+
+16 MB Flash
+8 MB OPI PSRAM
+
+If you are using a different ESP32-S3 module, verify its Flash and PSRAM
+configuration before using this firmware.
+
+
+------------------------------------------------------------
+11. BUILDING FROM SOURCE
+------------------------------------------------------------
+
+This section is intended for developers who want to modify or rebuild the
+firmware.
+
+You will need:
+
+- Visual Studio Code
+- PlatformIO
+- Git
+- ESP32-S3-WROOM-1-N16R8
+- USB data cable
+
+
+11.1 Install Visual Studio Code
+--------------------------------
+
+Download Visual Studio Code:
+
+https://code.visualstudio.com/
+
+Install it on your computer.
+
+
+11.2 Install PlatformIO
+-----------------------
+
+Open Visual Studio Code.
+
+Open:
+
+Extensions
+
+Search for:
+
+PlatformIO IDE
+
+Install the PlatformIO IDE extension.
+
+Restart Visual Studio Code if requested.
+
+
+11.3 Clone the Repository
+-------------------------
+
+Open a terminal and run:
+
+git clone https://github.com/FarhanLabs1/bruce-esp32s3-st7735-psram-fix.git
+
+Then enter the project folder:
+
+cd bruce-esp32s3-st7735-psram-fix
+
+
+11.4 Open the Project
+---------------------
+
+Open the project folder in Visual Studio Code.
+
+PlatformIO should automatically detect the project configuration.
+
+
+11.5 Build
+----------
+
+From PlatformIO:
+
+PlatformIO -> Build
+
+Or use:
+
+pio run
+
+Wait for the build to finish.
+
+
+11.6 Upload
+-----------
+
+Connect the ESP32-S3 to the computer using the UART port.
+
+Then select:
+
+PlatformIO -> Upload
+
+Or run:
+
+pio run --target upload
+
+If the ESP32-S3 does not automatically enter download mode, use the
+BOOT/RESET procedure described earlier.
+
+
+------------------------------------------------------------
+12. IMPORTANT NOTES
+------------------------------------------------------------
+
+This firmware was developed and tested specifically on:
+
+ESP32-S3-WROOM-1-N16R8
+
+with:
+
+16 MB Flash
+8 MB OPI PSRAM
+
+Always verify your hardware before flashing.
+
+Different ESP32-S3 boards may have different Flash, PSRAM, pinout, or
+peripheral configurations.
+
+Do not assume that this firmware is compatible with every ESP32-S3 board.
+
+Always use the firmware from the GitHub Release intended for your hardware.
+
+
+------------------------------------------------------------
+13. USEFUL LINKS
+------------------------------------------------------------
+
+Project Repository:
+
+https://github.com/FarhanLabs1/bruce-esp32s3-st7735-psram-fix
+
+Project Releases:
+
+https://github.com/FarhanLabs1/bruce-esp32s3-st7735-psram-fix/releases
+
+Espressif Web Flasher:
+
+https://espressif.github.io/esptool-js/
+
+Espressif esptool-js Documentation:
+
+https://espressif.github.io/esptool-js/docs/
+
+Official Bruce Firmware:
+
+https://github.com/BruceDevices/firmware
+
+Official Bruce Website:
+
+https://bruce.computer/
+
+Original ViniciusHNF Project:
+
+https://github.com/viniciushnf/ESP32-S3-Bruce-ST7735-1.8
+
+
+------------------------------------------------------------
+14. PROJECT MAINTAINER
+------------------------------------------------------------
+
+FarhanLabs1
+
+GitHub:
+https://github.com/FarhanLabs1
+
+YouTube:
+https://www.youtube.com/@FarhanLabs
+
+Instagram:
+https://www.instagram.com/FarhanLabs1/
+
+Instagram:
+https://www.instagram.com/Farhan__4_/
+
+LinkedIn:
+https://www.linkedin.com/in/farhan-shaikh-80a69b228/
+
+
+------------------------------------------------------------
+15. DISCLAIMER
+------------------------------------------------------------
+
+This project is intended for educational, research, development, and
+authorized security-testing purposes.
+
+Bruce Firmware contains security-testing functionality.
+
+Only use this software on hardware, systems, and networks that you own or
+have explicit permission to test.
+
+The author is not responsible for damage, data loss, hardware failure,
+legal consequences, or misuse resulting from this project.
+
+Always comply with applicable laws and regulations.
+
+Use this project responsibly and only in authorized environments.
